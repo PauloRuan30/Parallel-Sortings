@@ -1,0 +1,85 @@
+#include <iostream>
+#include <vector>
+#include <chrono>
+#include <random>
+#include "include/SerialBubbleSort.h"
+#include "include/SerialCountingSort.h"
+#include "include/SerialInsertionSort.h"
+#include "include/SerialMergeSort.h"
+#include "include/SerialQuickSort.h"
+#include "include/SerialSelectionSort.h"
+#include "include/ParallelBubbleSort.h"
+#include "include/ParallelCountingSort.h"
+#include "include/ParallelInsertionSort.h"
+#include "include/ParallelMergeSort.h"
+#include "include/ParallelQuickSort.h"
+#include "include/ParallelSelectionSort.h"
+
+const std::vector<int> SIZES = {10, 100, 1000, 10000};
+const int NUM_THREADS = 4;
+
+// For parallel sorting functions that require only an array and thread count
+void runAndTimeSort(std::vector<int> originalArray, const std::string& sortName, 
+                    void (*sortMethod)(std::vector<int>&, int), int numThreads) {
+    auto start = std::chrono::high_resolution_clock::now();
+    sortMethod(originalArray, numThreads);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::nano> duration = end - start;
+    std::cout << sortName << " Time: " << duration.count() << " ns" << std::endl;
+}
+
+// For counting sort, which requires maxValue and numThreads
+void runAndTimeSort(std::vector<int> originalArray, const std::string& sortName, 
+                    void (*sortMethod)(std::vector<int>&, int, int), int maxValue, int numThreads) {
+    auto start = std::chrono::high_resolution_clock::now();
+    sortMethod(originalArray, maxValue, numThreads);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::nano> duration = end - start;
+    std::cout << sortName << " Time: " << duration.count() << " ns" << std::endl;
+}
+
+// For serial sorting functions that require only an array
+void runAndTimeSort(std::vector<int> originalArray, const std::string& sortName, 
+                    void (*sortMethod)(std::vector<int>&)) {
+    auto start = std::chrono::high_resolution_clock::now();
+    sortMethod(originalArray);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::nano> duration = end - start;
+    std::cout << sortName << " Time: " << duration.count() << " ns" << std::endl;
+}
+
+// Generates a random integer array of specified size
+std::vector<int> generateRandomArray(int size) {
+    std::vector<int> array(size);
+    std::generate(array.begin(), array.end(), []() { return rand() % 1000; });
+    return array;
+}
+
+int main() {
+    std::cout << "Comparing Parallel and Serial Sorting Algorithms with Varying Array Sizes\n" << std::endl;
+
+    for (int size : SIZES) {
+        std::cout << "Array Size: " << size << std::endl;
+        std::vector<int> array = generateRandomArray(size);
+
+        // Parallel sorting algorithms
+        std::cout << "Parallel Sorts:" << std::endl;
+        runAndTimeSort(array, "Parallel Bubble Sort", ParallelBubbleSort::parallelBubbleSort, NUM_THREADS);
+        runAndTimeSort(array, "Parallel Selection Sort", ParallelSelectionSort::parallelSelectionSort, NUM_THREADS);
+        runAndTimeSort(array, "Parallel Insertion Sort", ParallelInsertionSort::parallelInsertionSort, NUM_THREADS);
+        runAndTimeSort(array, "Parallel Counting Sort", ParallelCountingSort::parallelCountingSort, 1000, NUM_THREADS); // Assuming max value 1000 for Counting Sort
+
+        // Serial sorting algorithms
+        std::cout << "Serial Sorts:" << std::endl;
+        runAndTimeSort(array, "Serial Merge Sort", SerialMergeSort::sort);  // Fixed: SerialMergeSort::sort is correct
+        runAndTimeSort(array, "Serial Quick Sort", SerialQuickSort::sort);  // Fixed: SerialQuickSort::sort is correct
+        runAndTimeSort(array, "Serial Bubble Sort", SerialBubbleSort::sort);
+        runAndTimeSort(array, "Serial Selection Sort", SerialSelectionSort::sort);
+        runAndTimeSort(array, "Serial Insertion Sort", SerialInsertionSort::sort);
+        runAndTimeSort(array, "Serial Counting Sort", SerialCountingSort::sort);
+
+        std::cout << "--------------------------------------------------\n" << std::endl;
+    }
+
+    return 0;
+}
