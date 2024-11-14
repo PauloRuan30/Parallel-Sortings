@@ -1,4 +1,4 @@
-#include "include/ParallelQuickSort.h"
+#include "include/ParallelQuickSort.h";
 
 void ParallelQuickSort::parallelQuickSort(std::vector<int>& array, int numThreads) {
     quickSort(array, 0, array.size() - 1);

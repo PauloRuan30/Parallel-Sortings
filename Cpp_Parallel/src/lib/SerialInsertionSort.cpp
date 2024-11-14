@@ -1,4 +1,4 @@
-#include "include/SerialInsertionSort.h"
+#include "include/SerialInsertionSort.h";
 
 void SerialInsertionSort::sort(std::vector<int>& a) {
     for (int i = 1; i < a.size(); i++) {

@@ -1,4 +1,4 @@
-#include "include/ParallelCountingSort.h"
+#include "include/ParallelCountingSort.h";
 
 void ParallelCountingSort::parallelCountingSort(std::vector<int>& array, int max, int numThreads) {
     std::atomic<int>* countArray = new std::atomic<int>[max + 1];

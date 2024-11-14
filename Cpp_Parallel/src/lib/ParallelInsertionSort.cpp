@@ -1,4 +1,4 @@
-#include "include/ParallelInsertionSort.h"
+#include "include/ParallelInsertionSort.h";
 
 void ParallelInsertionSort::parallelInsertionSort(std::vector<int>& array, int numThreads) {
     std::vector<std::thread> threads;

@@ -1,4 +1,4 @@
-#include "include/SerialCountingSort.h"
+#include "include/SerialCountingSort.h";
 
 void SerialCountingSort::sort(std::vector<int>& a) {
     int max = findMax(a);

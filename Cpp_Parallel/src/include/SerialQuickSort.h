@@ -5,7 +5,7 @@
 
 class SerialQuickSort {
 public:
-    void sort(std::vector<int>& a, int low, int high);
+    static void sort(std::vector<int>& a, int low, int high);
 private:
     static int partition(std::vector<int>& a, int low, int high);
 };

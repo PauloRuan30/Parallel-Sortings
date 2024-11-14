@@ -1,4 +1,4 @@
-#include "include/ParallelSelectionSort.h"
+#include "include/ParallelSelectionSort.h";
 
 void ParallelSelectionSort::parallelSelectionSort(std::vector<int>& array, int numThreads) {
     std::vector<std::thread> threads;

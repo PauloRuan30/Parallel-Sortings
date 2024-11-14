@@ -1,4 +1,4 @@
-#include "include/ParallelBubbleSort.h"
+#include "include/ParallelBubbleSort.h";
 
 void ParallelBubbleSort::parallelBubbleSort(std::vector<int>& array, int numThreads) {
     int n = array.size();

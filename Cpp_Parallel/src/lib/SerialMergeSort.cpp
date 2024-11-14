@@ -1,4 +1,4 @@
-#include "include/SerialMergeSort.h"
+#include "include/SerialMergeSort.h";
 
 void SerialMergeSort::sort(std::vector<int>& a, int n) {
     if (n < 2) return;

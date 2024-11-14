@@ -1,4 +1,4 @@
-#include "include/SerialSelectionSort.h"
+#include "include/SerialSelectionSort.h";   
 
 void SerialSelectionSort::sort(std::vector<int>& arr) {
     int n = arr.size();

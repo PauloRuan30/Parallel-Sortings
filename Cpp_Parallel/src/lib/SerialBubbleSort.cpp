@@ -1,4 +1,4 @@
-#include "include/SerialBubbleSort.h"
+#include "include/SerialBubbleSort.h";
 
 void SerialBubbleSort::sort(std::vector<int>& arr) {
     int n = arr.size();

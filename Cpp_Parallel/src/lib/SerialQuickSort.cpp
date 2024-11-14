@@ -1,4 +1,4 @@
-#include "include/SerialQuickSort.h"
+#include "include/SerialQuickSort.h";
 
 void SerialQuickSort::sort(std::vector<int>& a, int low, int high) {
     if (low < high) {
@@ -20,3 +20,4 @@ int SerialQuickSort::partition(std::vector<int>& a, int low, int high) {
     std::swap(a[i + 1], a[high]);
     return i + 1;
 }
+

@@ -1,4 +1,4 @@
-#include "include/ParallelMergeSort.h"
+#include "include/ParallelMergeSort.h";
 
 void ParallelMergeSort::parallelMergeSort(std::vector<int>& array, int numThreads) {
     mergeSort(array, 0, array.size() - 1);
